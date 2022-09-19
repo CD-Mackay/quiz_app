@@ -7,7 +7,7 @@ QUESTIONS = {
   "What is the purpose of the zip() function": ["To iterate over two or more sequences at the same time", 
   "To combine several strings into one", "To compress several files into one archive", "to get information from the user"]
 }
-
+num_correct = 0
 for num, (question, alternatives) in enumerate(QUESTIONS.items(), start=1):
   print(f"\nQuestion {num}:")
   print(f"{question}?")
@@ -20,5 +20,7 @@ for num, (question, alternatives) in enumerate(QUESTIONS.items(), start=1):
   answer = labeled_alternatives.get(answer_label)
   if answer == correct:
     print("Nailed it!")
+    num_correct += 1
   else:
     print(f"Apologies, the correct answer was {correct!r}, not {answer!r}")
+print(f"\nYou got {num_correct} correct out of a total of {num}")
