@@ -16,7 +16,8 @@ for num, (question, alternatives) in enumerate(QUESTIONS.items(), start=1):
   for label, alternative in labeled_alternatives.items():
       print(f" {label}) {alternative}")
 
-  answer_label = input("\nChoice?")
+  while (answer_label := input("\nChoice? ")) not in labeled_alternatives:
+    print(f"Please answer one of {', '.join(labeled_alternatives)}")
   answer = labeled_alternatives.get(answer_label)
   if answer == correct:
     print("Nailed it!")
