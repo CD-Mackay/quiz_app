@@ -8,11 +8,13 @@ QUESTIONS = {
 
 for question, alternatives in QUESTIONS.items():
   correct = alternatives[0]
-  for alternative in sorted(alternatives):
-      print(f" -{alternative}")
+  sorted_alternatives = sorted(alternatives)
+  for label, alternative in enumerate(sorted_alternatives):
+      print(f" {label}) {alternative}")
 
-  answer = input(f"{question}?")
+  answer_label = int(input(f"{question}?"))
+  answer = sorted_alternatives[answer_label]
   if answer == correct:
     print("Nailed it!")
   else:
-    print(f"Apologies, the correct answer was {correct}, not {answer}")
+    print(f"Apologies, the correct answer was {correct!r}, not {answer!r}")
