@@ -13,20 +13,21 @@ QUESTIONS = {
 
 def run_quiz():
   #Preprocess
-  questions = prepare_questions()
+  questions = prepare_questions(QUESTIONS, num_questions=NUM_PER_QUIZ)
 
   # Process (Main Loop)
   num_correct = 0
-  for question in questions:
-    num_correct += ask_question(question)
+  for num, (question, alternatives) in enumerate(questions, start=1):
+    print(f"\nQuestions {num}:")
+    num_correct += ask_question(question, alternatives)
 
   # Postprocess
-  print(f"\nYou got {num_correct} correct!")
+  print(f"\nYou got {num_correct} correct out of {num}")
 
 ## -------
-def prepare_questions():
-  num_questions = min(NUM_PER_QUIZ, len(QUESTIONS))
-  questions = random.sample(list(QUESTIONS.items()), k=num_questions)
+def prepare_questions(questions, num):
+  num_questions = min(num, len(questions))
+  questions = random.sample(list(questions.items()), k=num_questions)
   return questions
 
 ## ------
@@ -46,31 +47,15 @@ def get_answer(question, alternatives):
 def ask_question(question, alternatives):
   correct_answer = alternatives[0]
   ordered_alternatives = random.sample(alternatives, k=len(alternatives))
-   
-  answer = labeled_alternatives.get(answer_label)
-  if answer == correct:
+
+  answer =  get_answer(question, ordered_alternatives)
+  if answer == correct_answer:
     print("Nailed it!")
-    num_correct += 1
+    return 1
   else:
-    print(f"Apologies, the correct answer was {correct!r}, not {answer!r}")
+    print(f"The answer is {correct_answer!r} not {answer!r}")
+    return 0
 
 
-
-##
-# for num, (question, alternatives) in enumerate(questions, start=1):
-#   print(f"\nQuestion {num}:")
-#   print(f"{question}?")
-#   correct = alternatives[0]
-#   labeled_alternatives = dict(zip(ascii_lowercase, random.sample(alternatives, k=len(alternatives))))
-#   for label, alternative in labeled_alternatives.items():
-#       print(f" {label}) {alternative}")
-
-#   while (answer_label := input("\nChoice? ")) not in labeled_alternatives:
-#     print(f"Please answer one of {', '.join(labeled_alternatives)}")
-#   answer = labeled_alternatives.get(answer_label)
-#   if answer == correct:
-#     print("Nailed it!")
-#     num_correct += 1
-#   else:
-#     print(f"Apologies, the correct answer was {correct!r}, not {answer!r}")
-print(f"\nYou got {num_correct} correct out of a total of {num}")
+if __name__ == "__main__":
+    run_quiz()
