@@ -9,8 +9,6 @@ QUESTIONS = {
   "To combine several strings into one", "To compress several files into one archive", "to get information from the user"]
 }
 
-##
-
 def run_quiz():
   #Preprocess
   questions = prepare_questions(QUESTIONS, num_questions=NUM_PER_QUIZ)
@@ -30,8 +28,8 @@ def prepare_questions(questions, num_questions):
   questions = random.sample(list(questions.items()), k=num_questions)
   return questions
 
-## ------
 
+## ------
 def get_answer(question, alternatives):
   print(f"{question}?")
   labeled_alternatives = dict(zip(ascii_lowercase, alternatives))
@@ -42,8 +40,8 @@ def get_answer(question, alternatives):
     print(f"Please answer one of {', '.join(labeled_alternatives)}")
   return labeled_alternatives[answer_label]
 
-## ------
 
+## ------
 def ask_question(question, alternatives):
   correct_answer = alternatives[0]
   ordered_alternatives = random.sample(alternatives, k=len(alternatives))
@@ -56,6 +54,6 @@ def ask_question(question, alternatives):
     print(f"The answer is {correct_answer!r} not {answer!r}")
     return 0
 
-
+## -----
 if __name__ == "__main__":
     run_quiz()
