@@ -25,8 +25,8 @@ def run_quiz():
   print(f"\nYou got {num_correct} correct out of {num}")
 
 ## -------
-def prepare_questions(questions, num):
-  num_questions = min(num, len(questions))
+def prepare_questions(questions, num_questions):
+  num_questions = min(num_questions, len(questions))
   questions = random.sample(list(questions.items()), k=num_questions)
   return questions
 
